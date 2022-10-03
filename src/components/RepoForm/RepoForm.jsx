@@ -18,13 +18,12 @@ const RepoForm = () => {
 	const handleClick = async (e) => {
 		e.preventDefault();
 
-		isModal('in');
-
 		const user = await axios.get(`${API_GITHUB}/${username}`);
 		const repos = await axios.get(`${API_GITHUB}/${username}/repos`);
-
+		console.log(repos);
 		setUser(user.data);
 		setRepos(repos.data);
+		isModal('in');
 	};
 
 	const isModal = (v) => {
@@ -55,7 +54,7 @@ const RepoForm = () => {
 									</span>
 									<span className="email">
 										<EmailOutlined className="icon" />
-										{user.email}
+										{user.email ? user.email : '-'}
 									</span>
 									<span className="blog">
 										<LinkOutlined className="icon" />
@@ -64,7 +63,26 @@ const RepoForm = () => {
 								</div>
 							</div>
 							<div className="repositories">
-								<h1>Repositories........</h1>
+								<h4 className="topTitle"> List repositories : </h4>
+								<div className="bottom">
+									{repos.map((item, i) => {
+										return (
+											<div className="cardRepo" key={i}>
+												<div>
+													<a href={item.html_url} target="_blank">
+														<h6>
+															{++i}. {item.name}
+														</h6>
+													</a>
+													<span className="description">{item.description?.substr(0, 30) } {(item.description?.length >30 ) && '...'}</span>
+												</div>
+												<div>
+													<span className="lang">{item.language}</span>
+												</div>
+											</div>
+										);
+									})}
+								</div>
 							</div>
 						</div>
 					</div>
