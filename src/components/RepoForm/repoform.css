@@ -48,6 +48,7 @@
 .search button:hover {
 	background: #8b3afc;
 	color: #fff;
+	cursor: pointer;
 }
 
 .search button:disabled {
@@ -59,8 +60,7 @@
 
 .backdrop[isopen='in'] {
 	background-color: rgba(0, 0, 0, 0.507);
-	height: 100vh;
-	width: 100vw;
+
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -76,6 +76,8 @@
 	overflow: hidden;
 	transition: .5s;
 	visibility: hidden;
+	height: 100vh;
+	width: 100vw;
 }
 
 .backdrop[isopen='out'] .icon,
@@ -95,7 +97,7 @@
 	right: 0;
 	position: absolute;
 	flex-direction: column;
-	padding: 25px;
+	padding: 10px 15px 20px;
 	width: 90%;
 	margin: 30px auto;
 	border-radius: 12px;
@@ -106,32 +108,115 @@
 	justify-content: flex-end;
 }
 
+.wrapperRepo .top .icon {
+	border-radius: 100%;
+	color: red !important;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	border: 2px solid;
+	transition: 0.3s;
+}
+
+.wrapperRepo .top .icon:hover {
+	background: red;
+	color: white !important;
+	border-color: red;
+}
+
 .wrapperRepo .bottom {
 	display: flex;
 }
 
 .account {
-	flex: 1.3;
-	border: solid red;
+	flex: 2;
+	border-right: 1px solid #eee;
+	margin-right: 15px;
+	padding: 0 10px;
 }
 
-.account img {
-	width: 200px;
-	border-radius: 100%;
-}
 .account .profile {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	text-align: center;
+}
+.account img {
+	width: 200px;
+	border-radius: 100%;
+	margin-bottom: 10px;
+}
+.account h3,
+.account h5 {
+	margin: unset;
 }
 
+.account h5 {
+	color: #666;
+}
+
+.account .profile .bio {
+	font-size: 14px;
+}
 .account .social {
 	display: flex;
 	flex-direction: column;
 	font-size: 14px;
 }
 
-.repositories {
-	flex: 3;
-	border: 1px solid blue;
+.account .social .icon {
+	margin-right: 6px;
 }
+
+.repositories {
+	display: flex;
+	flex-direction: column;
+	flex: 5;
+}
+.repositories > .topTitle {
+	font-weight: 400;
+}
+
+.repositories .bottom {
+	flex: 3;
+	display: flex;
+	flex-wrap: wrap;
+	overflow-y: scroll;
+	max-height: 510px;
+	justify-content: space-between;
+}
+
+.repositories .cardRepo {
+	width: 250px;
+	border: 1px solid #eee;
+	height: 110px;
+	padding: 10px;
+	margin: 10px 0;
+	border-radius: 4px;
+	font-size: 13px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.repositories .cardRepo h6 {
+	font-size: 15px;
+}
+.repositories .cardRepo .description {
+	color: #555;
+}
+.repositories .cardRepo .lang {
+	font-size: 11px;
+	border-radius: 9px;
+	border: 1px solid rgb(218, 218, 218);
+	padding: 2px 4px;
+}
+.repositories .cardRepo .lang:before {
+	content: '</> : ';
+	font-weight: bold;
+}
+
+/* overflow: hidden !important;
+word-wrap: break-word !important;
+text-overflow: ellipsis !important;
+border: 1px solid red; */
