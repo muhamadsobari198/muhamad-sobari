@@ -1,0 +1,13 @@
+.overview {
+	flex: 2;
+	margin-right: 35px;
+}
+.overview .status {
+	display: flex;
+	margin-bottom: 5px;
+	align-items: center;
+}
+.overview .status .icon {
+	margin-right: 5px;
+	font-size: 18px !important;
+}
