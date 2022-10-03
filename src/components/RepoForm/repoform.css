@@ -49,3 +49,89 @@
 	background: #8b3afc;
 	color: #fff;
 }
+
+.search button:disabled {
+	background: #ddd;
+	/* color: purple; */
+	cursor: not-allowed;
+	color: #8b3afc;
+}
+
+.backdrop[isopen='in'] {
+	background-color: rgba(0, 0, 0, 0.507);
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	z-index: 99;
+	visibility: visible;
+}
+.backdrop[open] .icon {
+	display: block;
+}
+
+.backdrop {
+	overflow: hidden;
+	transition: .5s;
+	visibility: hidden;
+}
+
+.backdrop[isopen='out'] .icon,
+.backdrop[isopen='out'] .wrapper {
+	visibility: hidden;
+}
+
+.wrapperRepo {
+	display: flex;
+	background: white;
+	width: 100%;
+	height: -moz-fit-content;
+	height: fit-content;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	flex-direction: column;
+	padding: 25px;
+	width: 90%;
+	margin: 30px auto;
+	border-radius: 12px;
+}
+
+.wrapperRepo .top {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.wrapperRepo .bottom {
+	display: flex;
+}
+
+.account {
+	flex: 1.3;
+	border: solid red;
+}
+
+.account img {
+	width: 200px;
+	border-radius: 100%;
+}
+.account .profile {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.account .social {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+}
+
+.repositories {
+	flex: 3;
+	border: 1px solid blue;
+}
