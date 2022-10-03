@@ -4,7 +4,7 @@ import { CheckCircle } from '@material-ui/icons';
 const Overview = () => {
 	return (
 		<div className="overview">
-			<div class="status">
+			<div className="status">
 				<CheckCircle className="icon" />
 				<span>Works with GitHub API</span>
 			</div>
