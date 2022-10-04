@@ -1,50 +1,34 @@
 import './repoform.css';
 import { AccountCircleOutlined } from '@material-ui/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import BackdropRepo from './../Backdrop/BackdropRepo';
 import BackdropError from './../Backdrop/BackdropError';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser, getRepo } from '../../redux/apiCalls';
 
 const RepoForm = () => {
-	const [ isFetching, setIsFetching ] = useState(false);
-	const [ isOpen, setIsOpen ] = useState('out');
-	const [ isError, setIsError ] = useState('not');
-	const [ errMessage, setErrMessage ] = useState('');
 	const [ username, setUsername ] = useState();
-	const [ user, setUser ] = useState({});
-	const [ repos, setRepos ] = useState([]);
+	const dispatch = useDispatch();
+	const github = useSelector((state) => state.github);
+
+	const { user, repositories, isFetching, isError, errMessage, isOpen } = github;
 
 	const handleClick = async (e) => {
 		e.preventDefault();
-
-		setIsFetching(true);
-
-		try {
-			const user = await axios.get(`${API_GITHUB}/${username}`);
-			const repos = await axios.get(`${API_GITHUB}/${username}/repos`);
-
-			setIsFetching(false);
-			setUser(user.data);
-			setRepos(repos.data);
-			isModal('in');
-		} catch (e) {
-			setIsFetching(false);
-
-			const message = e.response && e.response.data ? e.response.data.message : e.message;
-
-			setErrMessage(message);
-			isModalError('yes');
-		}
+		getUser(dispatch, username);
+		getRepo(dispatch, username);
 	};
 
-	const isModal = (v) => {
-		setIsOpen(v);
-	};
-
-	const isModalError = (v) => {
-		setIsError(v);
-	};
+	useEffect(
+		() => {
+			console.group('---------Check State---------');
+			console.log(github);
+			console.groupEnd();
+		},
+		[ github ]
+	);
 
 	return (
 		<div className="repoForm">
@@ -62,8 +46,8 @@ const RepoForm = () => {
 				</div>
 			</div>
 
-			<BackdropRepo isOpen={isOpen} user={user} repos={repos} errMessage={errMessage} isModal={isModal} />
-			<BackdropError isError={isError} errMessage={errMessage} isModalError={isModalError} />
+			<BackdropRepo isOpen={isOpen} user={user} repos={repositories} errMessage={errMessage} />
+			<BackdropError isError={isError} errMessage={errMessage} />
 		</div>
 	);
 };

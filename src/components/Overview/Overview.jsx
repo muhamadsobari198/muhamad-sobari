@@ -5,7 +5,7 @@ const Overview = () => {
 	return (
 		<div className="overview">
 			<div className="status">
-				<CheckCircle className="icon" />
+				<CheckCircle className="icon" style={{ color: '#4caf50' }} />
 				<span>Works with GitHub API</span>
 			</div>
 			<h1 className="mb-4">List Repositories For a User</h1>
@@ -14,7 +14,7 @@ const Overview = () => {
 				Just enter your username in the side form
 			</p>
 			<a href="#" className="btn btn-primary rounded-pill">
-				Get App Now
+				Created by @muhamadsobari198
 			</a>
 		</div>
 	);
