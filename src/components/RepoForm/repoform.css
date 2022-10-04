@@ -58,34 +58,60 @@
 	color: #8b3afc;
 }
 
-.backdrop[isopen='in'] {
+.backdrop[isopen='in'],
+.backdrop[iserror='yes'] {
 	background-color: rgba(0, 0, 0, 0.507);
-
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	top: 0;
 	z-index: 99;
-	visibility: visible;
+	opacity: 1;
+	transform: scale(1);
 }
-.backdrop[open] .icon {
-	display: block;
+.backdrop[isopen='out'],
+.backdrop[iserror='not'] {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	z-index: 0;
+	opacity: 1;
+	transform: scale(0);
+	transition: .5s ease-in-out transform;
+}
+.backdrop[isopen='in'] .wrapperRepo,
+.backdrop[iserror='yes'] .wrapperError {
+	transform: scale(1);
+	opacity: 1;
 }
 
 .backdrop {
 	overflow: hidden;
 	transition: .5s;
-	visibility: hidden;
-	height: 100vh;
+	height: 0;
 	width: 100vw;
+	opacity: 0;
+	height: 100vh;
+	position: fixed;
+	transition: .5s ease-in-out opacity;
+	transform: scale(0);
 }
 
-.backdrop[isopen='out'] .icon,
-.backdrop[isopen='out'] .wrapper {
-	visibility: hidden;
+.backdrop .wrapperRepo,
+.backdrop .wrapperError {
+	transform: scale(0);
+	opacity: 0;
+	transition: .5s ease-in-out opacity, .5s ease-in-out transform, 0s ease-in-out height;
 }
 
-.wrapperRepo {
+/* .backdrop[isopen='out'] .wrapperRepo {
+	transform: scale(0);
+	transition: .5s ease-in-out transform;
+} */
+
+.wrapperRepo,
+.wrapperError {
 	display: flex;
 	background: white;
 	width: 100%;
@@ -101,14 +127,20 @@
 	width: 90%;
 	margin: 30px auto;
 	border-radius: 12px;
+	transition: .5s;
+}
+.wrapperError {
+	width: 40% !important;
 }
 
-.wrapperRepo .top {
+.wrapperRepo .top,
+.wrapperError .top {
 	display: flex;
 	justify-content: flex-end;
 }
 
-.wrapperRepo .top .icon {
+.wrapperRepo .top .icon,
+.wrapperError .top .icon {
 	border-radius: 100%;
 	color: red !important;
 	width: 30px;
@@ -118,7 +150,8 @@
 	transition: 0.3s;
 }
 
-.wrapperRepo .top .icon:hover {
+.wrapperRepo .top .icon:hover,
+.wrapperError .top .icon:hover {
 	background: red;
 	color: white !important;
 	border-color: red;
@@ -126,6 +159,16 @@
 
 .wrapperRepo .bottom {
 	display: flex;
+}
+.wrapperError .bottom {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.wrapperError .bottom .icon {
+	font-size: 50px !important;
+	color: rgb(252, 92, 0);
 }
 
 .account {
