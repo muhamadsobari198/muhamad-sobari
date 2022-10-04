@@ -1,3 +1,13 @@
+# 💼 List Repositories For a User
+### lists public repositories for the specified user
+
+![preview img](/preview1.png)
+
+![preview img](/preview2.png)
+
+![preview img](/preview3.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
